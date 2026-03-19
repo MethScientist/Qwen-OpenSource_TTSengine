@@ -11,3 +11,21 @@ This project is a Python-based Text-to-Speech (TTS) engine using Qwen models. It
 - Stream audio in chunks for faster playback.
 - Users can select model, device, dtype, speaker, and voice instructions.
 - Works locally, in Colab, or via a public API endpoint.
+ 
+## API Usage Example (Python Client)
+import requests
+import numpy as np
+import soundfile as sf
+
+response = requests.get(
+    "http://localhost:8000/tts",
+    params={"text": "Hello world", "speaker": "Ryan"},
+    stream=True
+)
+
+pcm_data = b""
+for chunk in response.iter_content(4096):
+    pcm_data += chunk
+
+audio = np.frombuffer(pcm_data, dtype=np.int16).astype(np.float32)/32767
+sf.write("output.wav", audio, 24000)
