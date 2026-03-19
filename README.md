@@ -11,7 +11,15 @@ This project is a Python-based Text-to-Speech (TTS) engine using Qwen models. It
 - Stream audio in chunks for faster playback.
 - Users can select model, device, dtype, speaker, and voice instructions.
 - Works locally, in Colab, or via a public API endpoint.
- 
+- 
+ ## How It Works
+
+1. **Run the Engine Server**  
+   Start the FastAPI server to expose the TTS endpoint:
+   ```bash
+   uvicorn main:app --host 0.0.0.0 --port 8000
+
+   
 ## API Usage Example (Python Client)
 import requests
 import numpy as np
